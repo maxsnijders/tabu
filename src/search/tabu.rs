@@ -1,4 +1,5 @@
 use hashbrown::HashSet;
+use core::hash::Hash;
 
 /// Runs a tabu search *minimization*.
 pub fn tabu_search<State, F, D>(
@@ -11,18 +12,17 @@ pub fn tabu_search<State, F, D>(
 where
     D: Iterator<Item = State>,
     F: Fn(&State) -> D,
-    State: Hash
+    State: Hash + Clone + Eq,
 {
     let mut tabu_list = HashSet::new();
     let mut best = state.clone();
     let mut best_cost = cost(&best);
-    let mut current = state;
 
     for _ in 0..max_iterations {
         let mut best_descendant = None;
         let mut best_descendant_cost = f64::INFINITY;
 
-        for descendant in descendants(&current) {
+        for descendant in descendants(&best) {
             if tabu_list.contains(&descendant) {
                 continue;
             }
@@ -60,7 +60,7 @@ mod tests {
 
     #[test]
     fn test_tabu_search() {
-        let mut state = 20;
+        let state = 20;
         let descendants = |state: &i32| (state - 1..=state + 1).filter(|&x| x >= 0);
         let cost = |state: &i32| state.pow(2) as f64;
         let max_iterations = 100;
