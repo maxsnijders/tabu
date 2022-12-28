@@ -1,0 +1,14 @@
+[package]
+name = "tabu"
+version = "0.1.0"
+edition = "2021"
+license-file = "LICENSE"
+description = "Provides local search functionality in general, plus derived applications such as local search based clustering"
+readme = "README.md"
+keywords = ["local", "search", "tabu", "clustering"]
+categories = ["algorithms"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+hashbrown = "0.13.1"
