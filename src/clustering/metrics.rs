@@ -16,6 +16,12 @@ pub fn diameter<Item>(items: &Vec<Item>, distance: impl Fn(&Item, &Item) -> f64)
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+    
     #[test]
-    fn test_diameter_of_integer_vector() {}
+    fn test_diameter_of_integer_vector() {
+        let test_vec = vec![1, 2, 3, 4];
+        
+        assert_eq!(diameter(test_vec, |x, y| (x - y).abs()), 3);
+    }
 }
