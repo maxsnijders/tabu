@@ -25,6 +25,9 @@ where
         let mut best_descendant = None;
         let mut best_descendant_cost = f64::INFINITY;
 
+        // Add the current state to the tabu list
+        tabu_list.insert(current.clone());
+
         // Consider all descendants of the current state.
         for descendant in descendants(&current) {
             // If the descendant is in the tabu list, skip it.
@@ -32,14 +35,11 @@ where
                 continue;
             }
 
-            // Add the descendant to the tabu list.
-            tabu_list.insert(descendant.clone());
-
             // If the descendant is better than the stopping cost, return it.
             let descendant_cost = cost(&descendant);
             if let Some(sc) = stopping_cost {
                 if descendant_cost < sc {
-                return descendant;
+                    return descendant;
                 }
             }
 
@@ -81,6 +81,19 @@ mod tests {
         let best = tabu_search(state, descendants, cost, max_iterations, stopping_cost);
 
         assert_eq!(best, 0);
+    }
+
+    #[test]
+    fn test_tabu_search_cross_barier() {
+        let state = 0;
+        let descendants = |state: &i32| (state - 1..=state + 1).filter(|&x| x >= 0 && x <= 10);
+        let cost = |&state: &i32| if state < 3 {state - 3 } else {3 - state} as f64;
+        let max_iterations = 100;
+        let stopping_cost = None;
+
+        let best = tabu_search(state, descendants, cost, max_iterations, stopping_cost);
+
+        assert_eq!(best, 10);
     }
 
     #[test]
