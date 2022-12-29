@@ -7,6 +7,8 @@ description = "Provides local search functionality in general, plus derived appl
 readme = "README.md"
 keywords = ["local", "search", "tabu", "clustering"]
 categories = ["algorithms"]
+repository = "https://github.com/maxsnijders/tabu"
+author = "Max Snijders"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
