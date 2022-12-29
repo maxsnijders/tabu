@@ -1,6 +1,13 @@
 use crate::search::tabu_search;
 use core::hash::Hash;
 
+/// Runs a tabu-search based clustering
+/// # Arguments
+/// * `items`: the items to cluster
+/// * `cost`: a function that returns the cost of a possible clustering
+/// * `n_clusters`: the number of clusters to identify
+/// * `max_iterations`: the number of iterations (at most) to search for
+/// * `stopping_cost`: if `Some(x)`, we stop the search when the cost of the current state no longer exceeds `x`.
 pub fn cluster_tabu<Item>(
     items: Vec<Item>,
     cost: impl Fn(&Vec<Vec<Item>>) -> f64,
