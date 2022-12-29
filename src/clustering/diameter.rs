@@ -1,4 +1,7 @@
 /// Computes the diameter of a vector of items, defined as the largest pairwise distance between elements in the vector
+/// # Arguments
+/// * `items`: the items to compute the diameter for
+/// * `distance`: a callable computing the distance between any two items
 pub fn diameter<Item, T>(items: &Vec<Item>, distance: impl Fn(&Item, &Item) -> T) -> Option<T>
 where
     T: PartialOrd + Copy,

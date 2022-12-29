@@ -2,6 +2,12 @@ use core::hash::Hash;
 use hashbrown::HashSet;
 
 /// Runs a tabu search *minimization*.
+/// # Arguments
+/// * `state`: the initial state to start the search from
+/// * `descendants`: a function to generate (possible) descendants of a state given a state
+/// * `cost`: the cost of a state
+/// * `max_iterations`: we stop when we've ran through this many iterations 
+/// * `stopping_cost`: if not None, we stop when our cost no longer exceeds this value.
 pub fn tabu_search<State, F, D>(
     state: State,
     descendants: F,
