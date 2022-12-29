@@ -95,7 +95,9 @@ mod tests {
             |clusters: &Vec<Vec<i32>>| {
                 clusters
                     .iter()
-                    .map(|cluster| diameter(cluster, |x, y| (x - y).abs() as f64))
+                    .map(|cluster| {
+                        diameter(cluster, |x, y| (x - y).abs() as f64).unwrap_or(f64::NEG_INFINITY)
+                    })
                     .fold(f64::NEG_INFINITY, f64::max)
             },
             n_clusters,
