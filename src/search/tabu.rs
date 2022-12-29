@@ -7,7 +7,7 @@ pub fn tabu_search<State, F, D>(
     descendants: F,
     cost: impl Fn(&State) -> f64,
     max_iterations: usize,
-    stopping_cost: f64,
+    stopping_cost: Option<f64>,
 ) -> State
 where
     D: Iterator<Item = State>,
@@ -37,8 +37,10 @@ where
 
             // If the descendant is better than the stopping cost, return it.
             let descendant_cost = cost(&descendant);
-            if descendant_cost < stopping_cost {
+            if let Some(sc) = stopping_cost {
+                if descendant_cost < sc {
                 return descendant;
+                }
             }
 
             // If the descendant is better than the best descendant we've seen so far, update the best descendant.
@@ -74,7 +76,7 @@ mod tests {
         let descendants = |state: &i32| (state - 1..=state + 1).filter(|&x| x >= 0);
         let cost = |state: &i32| *state as f64;
         let max_iterations = 100;
-        let stopping_cost = 0.0;
+        let stopping_cost = None;
 
         let best = tabu_search(state, descendants, cost, max_iterations, stopping_cost);
 
@@ -100,7 +102,7 @@ mod tests {
                 descendants,
                 cost,
                 max_iterations,
-                stopping_cost,
+                Some(stopping_cost),
             );
 
             assert_eq!(best, (5, 5));
