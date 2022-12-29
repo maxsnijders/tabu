@@ -1,5 +1,5 @@
 pub mod cluster_tabu;
-pub mod metrics;
+pub mod diameter;
 
 pub use cluster_tabu::cluster_tabu;
-pub use metrics::diameter;
+pub use diameter::diameter;
