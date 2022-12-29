@@ -87,7 +87,7 @@ mod tests {
     fn test_tabu_search_cross_barier() {
         let state = 0;
         let descendants = |state: &i32| (state - 1..=state + 1).filter(|&x| x >= 0 && x <= 10);
-        let cost = |&state: &i32| if state < 3 {state - 3 } else {3 - state} as f64;
+        let cost = |&state: &i32| if state < 3 { state - 3 } else { 3 - state } as f64;
         let max_iterations = 100;
         let stopping_cost = None;
 
