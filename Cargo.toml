@@ -12,3 +12,4 @@ categories = ["algorithms"]
 
 [dependencies]
 hashbrown = "0.13.1"
+itertools = "0.10.5"
