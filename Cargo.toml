@@ -1,6 +1,6 @@
 [package]
 name = "tabu"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license-file = "LICENSE"
 description = "Provides local search functionality in general, plus derived applications such as local search based clustering"
